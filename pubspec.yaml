@@ -1,0 +1,21 @@
+name: kuradesk_chat
+description: KuraDesk in-app chat plugin for Flutter. Embeds a themed chat widget that delivers conversations into your shared team inbox.
+version: 0.3.2
+homepage: https://desk.kurasika.tech
+repository: https://github.com/AlphaKTembo/kuradeskPlug
+issue_tracker: https://github.com/AlphaKTembo/kuradeskPlug/issues
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
