@@ -12,7 +12,7 @@ Or add it to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  kuradesk_chat: ^0.3.2
+  kuradesk_chat: ^0.3.3
 ```
 
 Then import it:

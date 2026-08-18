@@ -6,7 +6,13 @@ import 'kuradesk_chat_client.dart';
 import 'kuradesk_chat_storage.dart';
 import 'kuradesk_chat_theme.dart';
 
+/// The KuraDesk chat panel.
+///
+/// Renders a gated form until a session starts, then the message list and
+/// composer. Fills its parent, so it works both as a full screen and inside a
+/// sized container such as [KuradeskChatLauncher]'s panel.
 class KuradeskChatView extends StatefulWidget {
+  /// Creates a chat panel for the widget [widgetKey].
   const KuradeskChatView({
     super.key,
     required this.apiBaseUrl,
@@ -19,13 +25,28 @@ class KuradeskChatView extends StatefulWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(24)),
   });
 
+  /// Root URL of the KuraDesk deployment.
   final String apiBaseUrl;
+
+  /// Public widget key from KuraDesk settings.
   final String widgetKey;
+
+  /// Pre-fills the phone field.
   final String? initialPhone;
+
+  /// Pre-fills the name field.
   final String? initialName;
+
+  /// Overrides the logo supplied by the server.
   final String? logoUrl;
+
+  /// Whether to show a close button in the header.
   final bool showCloseButton;
+
+  /// Called when the close button is tapped.
   final VoidCallback? onClose;
+
+  /// Corner rounding of the panel. Use [BorderRadius.zero] for full screen.
   final BorderRadius borderRadius;
 
   @override

@@ -1,0 +1,19 @@
+name: kuradesk_chat_example
+description: Demonstrates how to embed the KuraDesk chat widget in a Flutter app.
+publish_to: none
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  kuradesk_chat:
+    path: ../
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

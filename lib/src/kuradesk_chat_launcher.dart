@@ -5,7 +5,11 @@ import 'kuradesk_chat_theme.dart';
 import 'kuradesk_chat_view.dart';
 
 /// Floating launcher + chat panel, similar to the web embed.
+///
+/// Wrap your app content in this widget to overlay a chat button in the
+/// bottom-right corner. Tapping it reveals a [KuradeskChatView] panel.
 class KuradeskChatLauncher extends StatefulWidget {
+  /// Creates a floating chat launcher above [child].
   const KuradeskChatLauncher({
     super.key,
     required this.child,
@@ -18,13 +22,28 @@ class KuradeskChatLauncher extends StatefulWidget {
     this.panelHeight = 620,
   });
 
+  /// Content rendered beneath the launcher and chat panel.
   final Widget child;
+
+  /// Root URL of the KuraDesk deployment.
   final String apiBaseUrl;
+
+  /// Public widget key from KuraDesk settings.
   final String widgetKey;
+
+  /// Overrides the logo supplied by the server.
   final String? logoUrl;
+
+  /// Pre-fills the phone field.
   final String? initialPhone;
+
+  /// Pre-fills the name field.
   final String? initialName;
+
+  /// Preferred panel width, clamped to the available screen width.
   final double panelWidth;
+
+  /// Preferred panel height, clamped to the available screen height.
   final double panelHeight;
 
   @override
@@ -57,8 +76,9 @@ class _KuradeskChatLauncherState extends State<KuradeskChatLauncher>
       final config = await _client.fetchConfig();
       if (mounted) setState(() => _config = config);
     } catch (_) {
-      if (mounted)
+      if (mounted) {
         setState(() => _config = KuradeskChatConfig(name: 'KuraDesk'));
+      }
     }
   }
 

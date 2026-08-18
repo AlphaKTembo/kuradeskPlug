@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
+/// Server-driven branding and behaviour for a chat widget.
+///
+/// Fetched from `GET /api/plugin/v1/config/:widgetKey` so appearance can be
+/// changed in KuraDesk without rebuilding the app.
 class KuradeskChatConfig {
+  /// Creates a configuration.
   KuradeskChatConfig({
     required this.name,
     this.welcomeMessage,
@@ -16,19 +21,44 @@ class KuradeskChatConfig {
     this.poweredByText,
   });
 
+  /// Widget name, defaulting to `KuraDesk`.
   final String name;
+
+  /// Greeting shown above the first message.
   final String? welcomeMessage;
+
+  /// Accent color as a hex string, e.g. `#0D9488`.
   final String? primaryColor;
+
+  /// Whether a phone number is required before starting a conversation.
   final bool requirePhone;
+
+  /// Whether replies are bridged to WhatsApp, which implies [requirePhone].
   final bool bridgeToWhatsApp;
+
+  /// Logo shown in the header and launcher button.
   final String? logoUrl;
+
+  /// Whether to show the "Powered by KuraDesk" footer.
   final bool showPoweredBy;
+
+  /// Header title, defaulting to `Chat with us`.
   final String? headerTitle;
+
+  /// Header subtitle, defaulting to a typical reply time.
   final String? headerSubtitle;
+
+  /// Title of the launcher hint bubble.
   final String? launcherTitle;
+
+  /// Subtitle of the launcher hint bubble.
   final String? launcherSubtitle;
+
+  /// Overrides the default footer label.
   final String? poweredByText;
 
+  /// Creates a configuration from a decoded JSON object, applying defaults for
+  /// missing fields.
   factory KuradeskChatConfig.fromJson(Map<String, dynamic> json) {
     return KuradeskChatConfig(
       name: (json['name'] as String?) ?? 'KuraDesk',
@@ -48,7 +78,12 @@ class KuradeskChatConfig {
   }
 }
 
+/// Resolved colors for the chat UI.
+///
+/// Obtain one with [resolve], which adapts to the ambient [Brightness] and the
+/// widget's accent color.
 class KuradeskChatPalette {
+  /// Creates a palette with explicit colors.
   const KuradeskChatPalette({
     required this.accent,
     required this.accentLight,
@@ -83,38 +118,103 @@ class KuradeskChatPalette {
     required this.isDark,
   });
 
+  /// Primary accent color.
   final Color accent;
+
+  /// Lighter accent used for highlights and gradients.
   final Color accentLight;
+
+  /// Top color of the panel background gradient.
   final Color panelTop;
+
+  /// Middle color of the panel background gradient.
   final Color panelMid;
+
+  /// Bottom color of the panel background gradient.
   final Color panelBottom;
+
+  /// Accent wash behind the header.
   final Color headerTint;
+
+  /// Divider below the header and around the panel.
   final Color headerBorder;
+
+  /// Color for titles and message text.
   final Color textPrimary;
+
+  /// Color for subtitles and hints.
   final Color textSecondary;
+
+  /// Fill color of text fields.
   final Color inputBackground;
+
+  /// Border of unfocused text fields.
   final Color inputBorder;
+
+  /// Border of focused text fields.
   final Color inputFocusedBorder;
+
+  /// Glow drawn around a focused field.
   final Color focusRing;
+
+  /// Background of the welcome card.
   final Color welcomeBackground;
+
+  /// Border of the welcome card.
   final Color welcomeBorder;
+
+  /// Background of agent message bubbles.
   final Color agentBubble;
+
+  /// Border of agent message bubbles.
   final Color agentBubbleBorder;
+
+  /// Start color of the customer bubble gradient.
   final Color customerBubbleStart;
+
+  /// End color of the customer bubble gradient.
   final Color customerBubbleEnd;
+
+  /// Text color inside customer bubbles.
   final Color customerText;
+
+  /// Background of the message composer.
   final Color composerBackground;
+
+  /// Divider above the message composer.
   final Color composerBorder;
+
+  /// Color of the footer label.
   final Color footerText;
+
+  /// Color of the online status dot.
   final Color onlineDot;
+
+  /// Color used for error messages.
   final Color error;
+
+  /// Background behind the logo mark.
   final Color markBackground;
+
+  /// Background of the floating launcher button.
   final Color launcherBackground;
+
+  /// Background of the launcher hint bubble.
   final Color hintBackground;
+
+  /// Start color of the send button gradient.
   final Color sendGradientStart;
+
+  /// End color of the send button gradient.
   final Color sendGradientEnd;
+
+  /// Whether this palette was built for a dark theme.
   final bool isDark;
 
+  /// Builds a palette for the current theme.
+  ///
+  /// Follows the ambient [Brightness] from [context] and derives accents from
+  /// [primaryColorHex], falling back to teal when it is null or malformed.
   static KuradeskChatPalette resolve(
     BuildContext context, {
     String? primaryColorHex,
@@ -195,12 +295,14 @@ class KuradeskChatPalette {
     );
   }
 
+  /// Vertical gradient painted behind the whole panel.
   LinearGradient get panelGradient => LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [panelTop, panelMid, panelBottom],
       );
 
+  /// Accent wash painted behind the header.
   LinearGradient get headerGradient => LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -211,12 +313,14 @@ class KuradeskChatPalette {
         ],
       );
 
+  /// Gradient filling the customer's own message bubbles.
   LinearGradient get customerBubbleGradient => LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [customerBubbleStart, customerBubbleEnd],
       );
 
+  /// Gradient used for the send button and other primary actions.
   LinearGradient get sendGradient => LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
